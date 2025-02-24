@@ -1,7 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import { generateToken, messaging } from './notifications/firebase';
+import { useEffect } from 'react';
+import { onMessage } from "firebase/messaging";
 
 function App() {
+  useEffect(() => {
+    generateToken();
+    onMessage(messaging, (payload) => {
+      console.log(payload);
+    });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
